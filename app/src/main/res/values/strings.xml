@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Just Java</string>
     <string name="quantity_label">Quantity</string>
+    <string name="price_label">Price</string>
     <string name="order_btn_label">Order</string>
     <string name="_0">0</string>
+    <string name="initial_qty">10</string>
+    <string name="_plus">+</string>
+    <string name="_minus">-</string>
 </resources>
