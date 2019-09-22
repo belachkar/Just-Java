@@ -1,7 +1,9 @@
 package io.github.belachkar.justjava;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,10 +14,11 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
+    private String name = "Belachkar Ali";
+    private Boolean hasWhippedCream = false;
     private int qty = 2;
     private int qtyUnits = 1;
     private int unitPrice = 5;
-    private String name = "Belachkar Ali";
 
     private TextView orderSummaryTextView;
     private TextView qtyTextView;
@@ -24,8 +27,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Get the Views pointers
         orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         qtyTextView = findViewById(R.id.quantity_text_view);
+
+        // Display initial Quantity value
         displayQty();
     }
 
@@ -34,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
      */
     public void submitOrder(View view) {
         int price = calculatePrice();
+        Log.v("MainActivity", "The price is " + price);
+
         String summary = createOrderSummary(price);
         displayMessage(summary);
     }
@@ -42,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
      * Display the given quantity on the screen
      */
     private void displayQty() {
-//        TextView qtyTextView = findViewById(R.id.quantity_text_view);
         qtyTextView.setText(String.format(Locale.US, "%d", qty));
-        orderSummaryTextView.setTextColor(0xff999999);
     }
 
     /**
@@ -65,24 +72,37 @@ public class MainActivity extends AppCompatActivity {
      */
     private String createOrderSummary(int totalPrice) {
         String summary = "Name:\t\t\t\t\t" + name;
+        summary += "\n" + "Add whipped cream? " + hasWhippedCream;
         summary += "\n" + "Quantity:\t\t\t" + qty;
         summary += "\n" + "Total Price:\t\t" + NumberFormat.getCurrencyInstance().format(totalPrice);
-        summary += "\n" + "Thank you!";
+        summary += "\n\n" + "Thank you!";
         return summary;
     }
 
     /**
-     * Increment the quantity
+     * Change the quantity (Increment - Decrement)
      */
     public void changeQty(@NotNull View view) {
         int viewId = view.getId();
         int value = (viewId == R.id.add_btn) ? qtyUnits : -qtyUnits;
         qty += (qty + value) >= 0 ? value : 0;
         displayQty();
+        makeOrderSummaryUnfocused();
     }
 
     private void displayMessage(String message) {
         orderSummaryTextView.setText(message);
         orderSummaryTextView.setTextColor(0xff111111);
     }
+
+    private void makeOrderSummaryUnfocused() {
+        orderSummaryTextView.setTextColor(0xff999999);
+    }
+
+    public void onWhippedCreamClicked(View view) {
+        Log.v("MainActivity", "The whipped cream check box is clicked: " + hasWhippedCream);
+        hasWhippedCream = ((CheckBox) view).isChecked();
+    }
+
+
 }

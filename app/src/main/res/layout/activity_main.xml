@@ -7,6 +7,30 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/toppings"
+        android:textAllCaps="true"
+        android:textSize="16sp" />
+
+    <CheckBox
+        android:id="@+id/whippedCreamCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="onWhippedCreamClicked"
+        android:paddingStart="24dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:text="@string/whippedCream"
+        android:textSize="16sp" />
+
+    <TextView
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -75,7 +99,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/_0"
         android:textColor="#000"
-        android:textSize="16sp" />
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/order_btn"

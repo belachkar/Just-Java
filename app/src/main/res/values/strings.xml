@@ -7,4 +7,6 @@
     <string name="initial_qty">10</string>
     <string name="_plus">+</string>
     <string name="_minus">-</string>
+    <string name="toppings">Toppings</string>
+    <string name="whippedCream">Whipped cream</string>
 </resources>
