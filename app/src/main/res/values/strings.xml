@@ -9,4 +9,6 @@
     <string name="_minus">-</string>
     <string name="toppings">Toppings</string>
     <string name="whippedCream">Whipped cream</string>
+    <string name="chocolate">Chocolate</string>
+    <string name="name">Name</string>
 </resources>
