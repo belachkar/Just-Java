@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Just Java</string>
+    <string name="_false">لا</string>
+    <string name="_true">أجل</string>
+    <string name="chocolate">شوكولاتة</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="mail_subject">ملخص الطلب</string>
+    <string name="msg_max_coffees">لا يمكنك طلب أكثر من 100 قهوة!</string>
+    <string name="msg_min_coffees">لا يمكنك طلب أقل من 1 قهوة!</string>
+    <string name="name">الاسم</string>
+    <string name="order_btn_label">الطلب</string>
+    <string name="order_summary_label">ملخص الطلب</string>
+    <string name="quantity_label">الكمية</string>
+    <string name="summary_add_chocolate">أضف الشوكولاته؟ %s</string>
+    <string name="summary_add_whipped_cream">أضف الكريمة المخفوقة؟ %s</string>
+    <string name="summary_name">الاسم: <xliff:g example="Ali" id="name">%s</xliff:g></string>
+    <string name="summary_price">السعر الكلي: <xliff:g id="price">%s</xliff:g></string>
+    <string name="summary_quantity">الكمية: <xliff:g id="quantity">%d</xliff:g></string>
+    <string name="thank_you">شكرا!</string>
+    <string name="toppings">إضافات</string>
+    <string name="whippedCream">كريمة مخفوقة</string>
+</resources>

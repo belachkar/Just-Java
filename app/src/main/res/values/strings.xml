@@ -1,14 +1,27 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Just Java</string>
     <string name="quantity_label">Quantity</string>
     <string name="order_summary_label">Order Summary</string>
     <string name="order_btn_label">Order</string>
-    <string name="_0">0</string>
-    <string name="initial_qty">10</string>
-    <string name="_plus">+</string>
-    <string name="_minus">-</string>
+    <string name="_0" translatable="false">0</string>
+    <string name="initial_qty" translatable="false">10</string>
+    <string name="_plus" translatable="false">+</string>
+    <string name="_minus" translatable="false">-</string>
     <string name="toppings">Toppings</string>
     <string name="whippedCream">Whipped cream</string>
     <string name="chocolate">Chocolate</string>
     <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="summary_name">The name: <xliff:g example="Ali" id="name">%s</xliff:g></string>
+    <string name="summary_add_whipped_cream">Add whipped cream? %s</string>
+    <string name="summary_add_chocolate">Add chocolate? %s</string>
+    <string name="summary_quantity">Quantity: <xliff:g id="quantity">%d</xliff:g></string>
+    <string name="summary_price">Total Price: <xliff:g id="price">%s</xliff:g></string>
+    <string name="thank_you">Thank you!</string>
+    <string name="msg_max_coffees">You cannot order more than 100 coffees!</string>
+    <string name="msg_min_coffees">You cannot order less than 1 coffee!</string>
+    <string name="mail_subject">Order Summary</string>
+    <string name="mail_test_header_notice" translatable="false">Test Android App</string>
+    <string name="_true">true</string>
+    <string name="_false">false</string>
 </resources>

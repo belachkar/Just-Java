@@ -1,10 +1,13 @@
 package io.github.belachkar.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,12 +18,13 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private int qty = 2;
-    private int qtyUnits = 1;
+    private int qtyUnits = 10;
     private int coffeePrice = 5;
     private int whippedCreamPrice = 1;
     private int chocolatePrice = 2;
 
     private EditText nameEditText;
+    private EditText emailEditText;
     private TextView orderSummaryTextView;
     private TextView qtyTextView;
     private CheckBox hasWhippedCreamCheckBox;
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the Views pointers
         nameEditText = findViewById(R.id.name_field);
+        emailEditText = findViewById(R.id.email_field);
         orderSummaryTextView = findViewById(R.id.order_summary_text_view);
         qtyTextView = findViewById(R.id.quantity_text_view);
         hasWhippedCreamCheckBox = findViewById(R.id.whippedCreamCheckBox);
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method is called when the Order button is clicked
      */
-    public void submitOrder(View view) {
+    public void submitOrder(@NotNull View view) {
         boolean hasWhippedCream = hasWhippedCreamCheckBox.isChecked();
         boolean hasChocolate = hasChocolateCheckBox.isChecked();
 
@@ -59,7 +64,25 @@ public class MainActivity extends AppCompatActivity {
         String name = nameEditText.getText().toString();
 
         String summary = createOrderSummary(price, hasWhippedCream, hasChocolate, name);
-        displayMessage(summary);
+
+        String email = emailEditText.getText().toString();
+        String[] addresses = {email};
+        String subject = getString(R.string.mail_subject);
+        String body = getString(R.string.mail_test_header_notice) + "\n\n" + summary;
+
+//        Create an intent to send an email with the order summary,
+//        or display the order if not
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            displayMessage(summary);
+        }
     }
 
     /**
@@ -76,14 +99,10 @@ public class MainActivity extends AppCompatActivity {
      */
     @org.jetbrains.annotations.Contract(pure = true)
     private int calculatePrice(boolean hasWhippedCream, boolean hasChocolate) {
-        int price = 0;
-        if (qty > 0) {
-            price += coffeePrice;
-            price += hasChocolate ? chocolatePrice : 0;
-            price += hasWhippedCream ? whippedCreamPrice : 0;
-            price *= qty;
-        }
-        return price;
+        int price = coffeePrice;
+        price += hasChocolate ? chocolatePrice : 0;
+        price += hasWhippedCream ? whippedCreamPrice : 0;
+        return price * qty;
     }
 
     /**
@@ -96,24 +115,41 @@ public class MainActivity extends AppCompatActivity {
      * @return text summary
      */
     private String createOrderSummary(int price, boolean hasWhippedCream, boolean hasChocolate, String name) {
-        String summary = "Name:\t\t\t\t\t" + name;
-        summary += "\n" + "Add whipped cream? " + hasWhippedCream;
-        summary += "\n" + "Add chocolate? " + hasChocolate;
-        summary += "\n" + "Quantity:\t\t\t" + qty;
-        summary += "\n" + "Total Price:\t\t" + NumberFormat.getCurrencyInstance().format(price);
-        summary += "\n\n" + "Thank you!";
+        String summary = getString(R.string.summary_name, name);
+        summary += "\n" + getString(R.string.summary_add_whipped_cream, getResourceStringIdFromBool(hasWhippedCream));
+        summary += "\n" + getString(R.string.summary_add_chocolate, getResourceStringIdFromBool(hasChocolate));
+        summary += "\n" + getString(R.string.summary_quantity, qty);
+        summary += "\n" + getString(R.string.summary_price, NumberFormat.getCurrencyInstance().format(price));
+        summary += "\n\n" + getString(R.string.thank_you);
         return summary;
     }
 
-    /**
-     * Change the quantity (Increment - Decrement)
-     */
-    public void changeQty(@NotNull View view) {
-        int viewId = view.getId();
-        int value = (viewId == R.id.add_btn) ? qtyUnits : -qtyUnits;
-        qty += (qty + value) >= 0 ? value : 0;
-        displayQty();
+    private String getResourceStringIdFromBool(boolean hasIt) {
+        if (hasIt) return getString(R.string._true);
+        return getString(R.string._false);
+    }
+
+
+    public void increment(@NotNull View view) {
+        if (qty > 99) {
+            Toast.makeText(this, getString(R.string.msg_max_coffees), Toast.LENGTH_SHORT).show();
+            return;
+        }
         makeOrderSummaryUnfocused();
+        qty += qtyUnits;
+        if (qty > 99) qty = 100;
+        displayQty();
+    }
+
+    public void decrement(@NotNull View view) {
+        if (qty < 2) {
+            Toast.makeText(this, getString(R.string.msg_min_coffees), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        makeOrderSummaryUnfocused();
+        qty -= qtyUnits;
+        if (qty < 2) qty = 1;
+        displayQty();
     }
 
     private void displayMessage(String message) {
@@ -124,5 +160,4 @@ public class MainActivity extends AppCompatActivity {
     private void makeOrderSummaryUnfocused() {
         orderSummaryTextView.setTextColor(0xff999999);
     }
-
 }
