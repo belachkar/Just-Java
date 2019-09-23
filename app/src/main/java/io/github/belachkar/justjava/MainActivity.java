@@ -18,10 +18,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private int qty = 2;
-    private int qtyUnits = 10;
-    private int coffeePrice = 5;
-    private int whippedCreamPrice = 1;
-    private int chocolatePrice = 2;
+    private final int qtyUnits = 10;
+    private final int coffeePrice = 5;
+    private final int whippedCreamPrice = 1;
+    private final int chocolatePrice = 2;
 
     private EditText nameEditText;
     private EditText emailEditText;
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         return summary;
     }
 
+    @NotNull
     private String getResourceStringIdFromBool(boolean hasIt) {
         if (hasIt) return getString(R.string._true);
         return getString(R.string._false);

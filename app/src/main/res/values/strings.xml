@@ -10,13 +10,15 @@
     <string name="toppings">Toppings</string>
     <string name="whippedCream">Whipped cream</string>
     <string name="chocolate">Chocolate</string>
+    <!-- Hint text for the user's name [CHAR LIMIT=NONE] -->
     <string name="name">Name</string>
+    <!-- Hint text for the user's email [CHAR LIMIT=NONE] -->
     <string name="email">Email</string>
     <string name="summary_name">The name: <xliff:g example="Ali" id="name">%s</xliff:g></string>
     <string name="summary_add_whipped_cream">Add whipped cream? %s</string>
     <string name="summary_add_chocolate">Add chocolate? %s</string>
-    <string name="summary_quantity">Quantity: <xliff:g id="quantity">%d</xliff:g></string>
-    <string name="summary_price">Total Price: <xliff:g id="price">%s</xliff:g></string>
+    <string name="summary_quantity">Quantity: <xliff:g example="10" id="quantity">%d</xliff:g></string>
+    <string name="summary_price">Total Price: <xliff:g example="$15" id="price">%s</xliff:g></string>
     <string name="thank_you">Thank you!</string>
     <string name="msg_max_coffees">You cannot order more than 100 coffees!</string>
     <string name="msg_min_coffees">You cannot order less than 1 coffee!</string>
