@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        LocalHelper.setLocale(this, "ar");
         setContentView(R.layout.activity_main);
 
         // Get the Views pointers
